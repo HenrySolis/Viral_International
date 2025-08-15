@@ -18,27 +18,178 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 .container{max-width:1180px;margin:0 auto;padding:0 20px}
 
+/* ENHANCED ANIMATIONS */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes slideInLeft {
+  0% { transform: translateX(-100px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  0% { transform: translateX(100px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInUp {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInDown {
+  0% { transform: translateY(-50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInScale {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes rotateIn {
+  0% { transform: rotate(-180deg) scale(0.5); opacity: 0; }
+  100% { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(212,175,55,0.3); }
+  50% { box-shadow: 0 0 20px rgba(212,175,55,0.6), 0 0 30px rgba(212,175,55,0.4); }
+}
+
+@keyframes textReveal {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes morphCard {
+  0%, 100% { border-radius: 14px; }
+  50% { border-radius: 25px; }
+}
+
+/* ENHANCED ANIMATION CLASSES */
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse { animation: pulse 2s ease-in-out infinite; }
+.animate-glow { animation: glow 3s ease-in-out infinite; }
+.animate-morph { animation: morphCard 4s ease-in-out infinite; }
+
+.slide-left { animation: slideInLeft 0.8s ease-out forwards; }
+.slide-right { animation: slideInRight 0.8s ease-out forwards; }
+.slide-up { animation: slideInUp 0.8s ease-out forwards; }
+.slide-down { animation: slideInDown 0.8s ease-out forwards; }
+.fade-scale { animation: fadeInScale 1s ease-out forwards; }
+.rotate-in { animation: rotateIn 1s ease-out forwards; }
+.bounce-in { animation: bounceIn 1.2s ease-out forwards; }
+
+.text-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-reveal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent);
+  animation: textReveal 2s ease-out forwards;
+}
+
+.gradient-shift {
+  background: linear-gradient(45deg, var(--accent), var(--accent-2), var(--accent));
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
 /* NAV */
 nav.nav{
   position:sticky; top:0; z-index:999;
   background:rgba(255,255,255,.95); backdrop-filter: blur(10px);
   border-bottom:1px solid var(--line);
   box-shadow:0 2px 10px rgba(0,0,0,.05);
+  transition: all 0.3s ease;
 }
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
 .brand{display:flex;align-items:center;gap:12px}
-.brand-logo{height:34px;width:auto;object-fit:contain; background:#d4af37;border-radius:8px; padding:4px}
-.brand-title{font-weight:800;letter-spacing:.2px}
+.brand-logo{height:34px;width:auto;object-fit:contain; background:#d4af37;border-radius:8px; padding:4px;
+  transition: transform 0.3s ease;
+}
+.brand-logo:hover { transform: scale(1.1) rotate(5deg); }
+.brand-title{font-weight:800;letter-spacing:.2px; transition: color 0.3s ease;}
+.brand-title:hover { color: var(--accent); }
+
 .menu{display:flex;gap:18px;align-items:center}
-.menu a{padding:10px 12px;border-radius:8px;color:#495057}
-.menu a:hover{background:rgba(0,0,0,.04)}
-.cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000; font-weight:800;padding:10px 14px;border-radius:10px}
-.cta:hover{filter:brightness(1.05)}
+.menu a{padding:10px 12px;border-radius:8px;color:#495057; 
+  transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+.menu a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.1), transparent);
+  transition: left 0.5s ease;
+}
+.menu a:hover::before { left: 100%; }
+.menu a:hover{background:rgba(212,175,55,0.1); transform: translateY(-2px);}
+
+.cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000; font-weight:800;padding:10px 14px;border-radius:10px;
+  transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+.cta:hover{filter:brightness(1.05); transform: scale(1.05);}
+
 /* mobile */
-.menu-toggle{display:none}
+.menu-toggle{display:none; transition: all 0.3s ease;}
+.menu-toggle:hover { transform: scale(1.1); }
 @media (max-width:960px){
   .menu{display:none}
-  .menu.is-open{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:60px;background:var(--bg);padding:14px;border-bottom:1px solid var(--line);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+  .menu.is-open{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:60px;background:var(--bg);padding:14px;border-bottom:1px solid var(--line);box-shadow:0 4px 12px rgba(0,0,0,.1);
+    animation: slideInDown 0.3s ease-out;
+  }
   .menu-toggle{display:block;border:1px solid var(--line);padding:8px 10px;border-radius:8px;background:transparent;color:#495057}
 }
 
@@ -51,57 +202,113 @@ nav.nav{
   content:"";position:absolute;inset:0;
   background:url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=2400&q=80') center/cover no-repeat fixed;
   transform:scale(1.02);
+  animation: float 20s ease-in-out infinite;
 }
 .hero::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.7)),
              radial-gradient(60% 60% at 50% 40%, rgba(212,175,55,.18), transparent 60%);
+  animation: pulse 8s ease-in-out infinite;
 }
 .hero-content{position:relative;z-index:2;max-width:980px;padding:40px 20px}
-.kicker{color:var(--accent);font-weight:800;letter-spacing:.3px;margin-bottom:10px}
+
+.kicker{color:var(--accent);font-weight:800;letter-spacing:.3px;margin-bottom:10px; 
+  animation: slideInDown 1s ease-out 0.2s both;
+}
+
 h1.display {
   font-size: clamp(28px, 4.2vw, 56px);
   line-height: 1.08;
   margin: 0 0 12px;
-  color: #ffffff; /* letras blancas */
+  color: #ffffff;
   text-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  animation: slideInUp 1s ease-out 0.4s both;
 }
+
 .hero-sub {
-  color: #ffffff; /* letras blancas */
+  color: #ffffff;
   font-size: clamp(16px, 1.3vw, 20px);
   opacity: 0.95;
   max-width: 840px;
   margin: 0 auto 22px;
+  animation: fadeInScale 1s ease-out 0.6s both;
 }
+
 .hero-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
 .badge {
   border: 1px solid var(--line);
   background: rgba(0, 0, 0, 0.03);
   padding: 8px 12px;
   border-radius: 999px;
-  color: #ffffff; /* letras blancas */
+  color: #ffffff;
   font-weight: 600;
   font-size: 14px;
+  transition: all 0.3s ease;
+  animation: bounceIn 0.8s ease-out both;
 }
+.badge:nth-child(1) { animation-delay: 0.8s; }
+.badge:nth-child(2) { animation-delay: 1s; }
+.badge:nth-child(3) { animation-delay: 1.2s; }
+.badge:nth-child(4) { animation-delay: 1.4s; }
+
+.badge:hover {
+  transform: scale(1.1);
+  background: rgba(212,175,55,0.2);
+  box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+}
+
 .hero-ctas{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
 .btn {
   padding: 12px 16px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.9); /* fondo más blanco */
+  background: rgba(255, 255, 255, 0.9);
   font-weight: 700;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.8s ease-out 1.6s both;
 }
 
-.btn:hover{background:rgba(0,0,0,.06)}
-.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000;border:none}
-.btn-primary:hover{filter:brightness(1.04)}
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+}
+.btn:hover::before { left: 100%; }
+.btn:hover{background:rgba(0,0,0,.06); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2);}
+
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000;border:none;
+  animation: slideInUp 0.8s ease-out 1.8s both;
+}
+.btn-primary:hover{filter:brightness(1.04); transform: translateY(-3px) scale(1.05);}
 
 /* SECTION */
-.section{padding:72px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,var(--bg),var(--bg-2))}
+.section{padding:72px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,var(--bg),var(--bg-2));
+  position: relative; overflow: hidden;
+}
 .section.alt{background:linear-gradient(180deg,var(--bg-2),var(--bg))}
 .sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:22px}
-h2.title{font-size:clamp(22px,3vw,34px);margin:0}
-.sec-note{color:var(--muted)}
+h2.title{font-size:clamp(22px,3vw,34px);margin:0; transition: all 0.3s ease;}
+.sec-note{color:var(--muted); transition: all 0.3s ease;}
+
+/* ENHANCED ANIMATIONS FOR SECTIONS */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transition: left 2s ease;
+}
+.section.animated::before { left: 100%; }
 
 /* GRID CARDS */
 .grid{display:grid;gap:16px}
@@ -114,67 +321,115 @@ h2.title{font-size:clamp(22px,3vw,34px);margin:0}
 .card{
   background:var(--card);
   border:1px solid var(--line);border-radius:14px;padding:18px;
-  box-shadow:0 4px 20px rgba(0,0,0,.08)
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
-.card h3{margin:6px 0 8px}
-.card p{color:#6c757d}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 30%, rgba(212,175,55,0.05) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.card:hover::before { transform: translateX(100%); }
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0,0,0,.15);
+  border-color: rgba(212,175,55,0.3);
+}
+
+.card h3{margin:6px 0 8px; transition: color 0.3s ease;}
+.card:hover h3 { color: var(--accent); }
+.card p{color:#6c757d; transition: color 0.3s ease;}
+.card:hover p { color: var(--text); }
+
 .icon{
   width:42px;height:42px;border-radius:10px;display:grid;place-items:center;
-  background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.25);color:var(--accent);font-size:20px
+  background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.25);color:var(--accent);font-size:20px;
+  transition: all 0.4s ease;
+}
+.card:hover .icon {
+  transform: scale(1.2) rotate(10deg);
+  background: rgba(212,175,55,.2);
+  box-shadow: 0 4px 15px rgba(212,175,55,0.3);
 }
 
 /* SERVICES */
-.service-card .line{margin:10px 0;border-top:1px dashed var(--line)}
+.service-card .line{margin:10px 0;border-top:1px dashed var(--line); transition: all 0.3s ease;}
+.service-card:hover .line { border-color: var(--accent); }
 .service-card ul{margin:10px 0 0 18px;color:#6c757d}
-.service-card li{margin:6px 0}
+.service-card li{margin:6px 0; transition: all 0.3s ease; position: relative;}
+.service-card li::before {
+  content: '→';
+  position: absolute;
+  left: -15px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+.service-card:hover li::before {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 /* EXPERTISE blocks */
 .expertise{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center}
 .expertise .img{
   border-radius:14px;overflow:hidden;border:1px solid var(--line);
-  box-shadow:0 4px 20px rgba(0,0,0,.08)
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+  transition: all 0.4s ease;
 }
-.expertise .img img{width:100%;height:100%;object-fit:cover}
+.expertise .img:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 8px 30px rgba(0,0,0,.2);
+}
+.expertise .img img{width:100%;height:100%;object-fit:cover; transition: all 0.4s ease;}
+.expertise .img:hover img { transform: scale(1.1); }
 @media (max-width:960px){.expertise{grid-template-columns:1fr}}
 
 /* INFLUENCERS */
-.influencer{display:flex;align-items:center;gap:12px}
-.influencer img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(212,175,55,.5)}
+.influencer{display:flex;align-items:center;gap:12px; transition: all 0.3s ease;}
+.influencer:hover { transform: translateX(10px); }
+.influencer img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(212,175,55,.5);
+  transition: all 0.4s ease;
+}
+.influencer:hover img {
+  transform: scale(1.1);
+  border-color: var(--accent);
+  box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+}
 .influencer .meta{display:flex;flex-direction:column}
-.influencer .handle{color:#495057}
-.ig-link{display:inline-flex;align-items:center;gap:8px;margin-top:6px;color:var(--accent)}
-.ig-logo{width:18px;height:18px}
+.influencer .handle{color:#495057; transition: color 0.3s ease;}
+.influencer:hover .handle { color: var(--accent); }
+.ig-link{display:inline-flex;align-items:center;gap:8px;margin-top:6px;color:var(--accent);
+  transition: all 0.3s ease;
+}
+.ig-link:hover { transform: translateX(5px); }
+.ig-logo{width:18px;height:18px; transition: transform 0.3s ease;}
+.ig-link:hover .ig-logo { transform: rotate(360deg); }
 
 /* TEAM */
-.team-card{text-align:center}
-.team-card img{width:96px;height:96px;border-radius:50%;object-fit:cover;margin:0 auto 10px;border:2px solid rgba(212,175,55,.5)}
-.role{color:var(--muted);font-size:14px}
-
-/* INVESTORS */
-.kpi{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
-.kpi .pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:rgba(0,0,0,.03)}
-.hl{color:var(--accent);font-weight:800}
-
-/* LOGO STRIP */
-.logostrip{display:flex;gap:22px;flex-wrap:wrap;align-items:center;justify-content:center;opacity:.9}
-.logo-badge{height:28px;opacity:.85;filter:grayscale(100%)}
-
-/* FAQ */
-.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:8px 0;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.faq summary{cursor:pointer;font-weight:700}
-.faq p{color:#6c757d;margin:8px 0 0}
-
-/* CONTACT */
-.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form .full{grid-column:1/-1}
-.input, select, textarea{
-  width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);
-  background:var(--card);color:#212529;resize:vertical
+.team-card{text-align:center; transition: all 0.3s ease;}
+.team-card:hover { transform: translateY(-5px); }
+.team-card img{width:96px;height:96px;border-radius:50%;object-fit:cover;margin:0 auto 10px;border:2px solid rgba(212,175,55,.5);
+  transition: all 0.4s ease;
 }
-.input option, select option{
-  background:var(--bg);color:var(--text);padding:8px
+.team-card:hover img {
+  transform: scale(1.1);
+  border-color: var(--accent);
+  box-shadow: 0 8px 25px rgba(212,175,55,0.3);
 }
-textarea{min-height:120px}
+.role{color:var(--muted);font-size:14px; transition: color 0.3s ease;}
+.team-card:hover .role { color: var(--accent); }
 
 /* TESTIMONIALS */
 .testimonial{
@@ -182,31 +437,135 @@ textarea{min-height:120px}
   border:1px solid rgba(212,175,55,.2);
   border-radius:14px;padding:20px;
   position:relative;
+  transition: all 0.4s ease;
+  overflow: hidden;
 }
+
 .testimonial::before{
   content:'"';font-size:48px;color:var(--accent);position:absolute;top:10px;left:18px;
-  line-height:1;font-family:Georgia,serif;opacity:.6
+  line-height:1;font-family:Georgia,serif;opacity:.6;
+  transition: all 0.4s ease;
 }
-.testimonial-text{margin:10px 0 16px;font-style:italic;color:#495057}
+
+.testimonial:hover::before {
+  transform: scale(1.2) rotate(10deg);
+  opacity: 1;
+}
+
+.testimonial:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(212,175,55,0.2);
+  border-color: var(--accent);
+}
+
+.testimonial-text{margin:10px 0 16px;font-style:italic;color:#495057; transition: color 0.3s ease;}
+.testimonial:hover .testimonial-text { color: var(--text); }
 .testimonial-author{display:flex;align-items:center;gap:12px}
-.testimonial-author img{width:48px;height:48px;border-radius:50%;border:2px solid rgba(212,175,55,.4)}
+.testimonial-author img{width:48px;height:48px;border-radius:50%;border:2px solid rgba(212,175,55,.4);
+  transition: all 0.4s ease;
+}
+.testimonial:hover .testimonial-author img {
+  transform: scale(1.1);
+  border-color: var(--accent);
+}
 .author-info{display:flex;flex-direction:column}
-.author-name{font-weight:700;color:var(--accent)}
+.author-name{font-weight:700;color:var(--accent); transition: all 0.3s ease;}
+.testimonial:hover .author-name { transform: translateX(5px); }
 .author-title{font-size:14px;color:var(--muted)}
+
+/* ENHANCED ANIMATIONS */
+.stagger-animation > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.stagger-animation.animate > *:nth-child(1) { animation: slideInUp 0.6s ease 0.1s both; }
+.stagger-animation.animate > *:nth-child(2) { animation: slideInUp 0.6s ease 0.2s both; }
+.stagger-animation.animate > *:nth-child(3) { animation: slideInUp 0.6s ease 0.3s both; }
+.stagger-animation.animate > *:nth-child(4) { animation: slideInUp 0.6s ease 0.4s both; }
+.stagger-animation.animate > *:nth-child(5) { animation: slideInUp 0.6s ease 0.5s both; }
+.stagger-animation.animate > *:nth-child(6) { animation: slideInUp 0.6s ease 0.6s both; }
+
+/* INVESTORS */
+.kpi{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+.kpi .pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:rgba(0,0,0,.03);
+  transition: all 0.3s ease;
+}
+.kpi .pill:hover {
+  transform: scale(1.05);
+  background: rgba(212,175,55,0.1);
+  border-color: var(--accent);
+}
+.hl{color:var(--accent);font-weight:800}
+
+/* LOGO STRIP */
+.logostrip{display:flex;gap:22px;flex-wrap:wrap;align-items:center;justify-content:center;opacity:.9}
+.logo-badge{height:28px;opacity:.85;filter:grayscale(100%); transition: all 0.4s ease;}
+.logo-badge:hover {
+  filter: grayscale(0%);
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* FAQ */
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:8px 0;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);
+  transition: all 0.3s ease;
+}
+.faq details:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,.1);
+}
+.faq summary{cursor:pointer;font-weight:700; transition: color 0.3s ease;}
+.faq details:hover summary { color: var(--accent); }
+.faq p{color:#6c757d;margin:8px 0 0}
+
+/* CONTACT */
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form .full{grid-column:1/-1}
+.input, select, textarea{
+  width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);
+  background:var(--card);color:#212529;resize:vertical;
+  transition: all 0.3s ease;
+}
+.input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+  transform: scale(1.02);
+}
+.input option, select option{
+  background:var(--bg);color:var(--text);padding:8px
+}
+textarea{min-height:120px}
 
 /* FOOTER */
 footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
 .footer-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .copy{color:#6c757d;font-size:14px}
 .socials{display:flex;gap:10px;align-items:center}
-.ig-pill{display:flex;align-items:center;gap:10px;border:1px solid var(--line);padding:10px 12px;border-radius:999px;background:rgba(0,0,0,.03)}
+.ig-pill{display:flex;align-items:center;gap:10px;border:1px solid var(--line);padding:10px 12px;border-radius:999px;background:rgba(0,0,0,.03);
+  transition: all 0.3s ease;
+}
+.ig-pill:hover {
+  transform: scale(1.05);
+  background: rgba(212,175,55,0.1);
+  border-color: var(--accent);
+}
 .small{font-size:12px;color:var(--muted)}
 
 /* UTIL */
 .center{text-align:center}
 .muted{color:var(--muted)}
 .btn-ghost{background:transparent;border:1px solid var(--line)}
-.tag{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.03);color:#495057;margin:6px 6px 0 0;font-size:12px}
+.tag{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.03);color:#495057;margin:6px 6px 0 0;font-size:12px;
+  transition: all 0.3s ease;
+}
+.tag:hover {
+  transform: scale(1.05);
+  background: rgba(212,175,55,0.1);
+  border-color: var(--accent);
+  color: var(--accent);
+}
 
 /* fade-in */
 .reveal{opacity:0;transform:translateY(8px);transition:all .6s ease}
@@ -215,29 +574,77 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
 /* About section enhancements */
 .about-text{
   font-size:18px;line-height:1.6;color:#495057;max-width:900px;margin:0 auto 32px;
-  text-align:center
+  text-align:center;
+  transition: all 0.3s ease;
 }
+
+/* CURSOR FOLLOW EFFECT */
+.cursor-follower {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+/* FLOATING ELEMENTS */
+.floating-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.floating-element {
+  position: absolute;
+  opacity: 0.1;
+  animation: float 15s ease-in-out infinite;
+}
+
+.floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+.floating-element:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+.floating-element:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
+.floating-element:nth-child(4) { bottom: 10%; right: 20%; animation-delay: 6s; }
 </style>
 </head>
 <body>
 
+<!-- CURSOR FOLLOWER -->
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- FLOATING ELEMENTS -->
+<div class="floating-elements">
+  <div class="floating-element">💫</div>
+  <div class="floating-element">⭐</div>
+  <div class="floating-element">✨</div>
+  <div class="floating-element">🚀</div>
+</div>
+
 <!-- NAV -->
-<nav class="nav">
+<nav class="nav" id="navbar">
   <div class="container nav-inner">
     <div class="brand">
-      <img class="brand-logo"  src="assets/viral-logo.png"  alt="Viral International logo">
-      <div class="brand-title">Viral International, LLC</div>
+      <img class="brand-logo animate-pulse" src="assets/viral-logo.png" alt="Viral International logo">
+      <div class="brand-title text-reveal">Viral International, LLC</div>
     </div>
     <button class="menu-toggle" id="menuToggle">Menu</button>
     <div class="menu" id="menu">
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#expertise">Casinos & NFT</a>
-      <a href="#influencers">Creators</a>
-      <a href="#testimonials">Reviews</a>
-      <a href="#team">Team</a>
-      <a href="#investors">Investors</a>
-      <a href="#contact" class="cta">Contact</a>
+      <a href="#services" class="shimmer-effect">Services</a>
+      <a href="#about" class="shimmer-effect">About</a>
+      <a href="#expertise" class="shimmer-effect">Casinos & NFT</a>
+      <a href="#influencers" class="shimmer-effect">Creators</a>
+      <a href="#testimonials" class="shimmer-effect">Reviews</a>
+      <a href="#team" class="shimmer-effect">Team</a>
+      <a href="#investors" class="shimmer-effect">Investors</a>
+      <a href="#contact" class="cta gradient-shift">Contact</a>
     </div>
   </div>
 </nav>
@@ -245,68 +652,169 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
 <!-- HERO -->
 <header class="hero">
   <div class="hero-content reveal">
-    <div class="kicker">10+ Years Building Social-First Growth</div>
-    <h1 class="display">We help brands and creators <span class="hl">win on social</span> with performance, creative and technology.</h1>
+    <div class="kicker animate-float">10+ Years Building Social-First Growth</div>
+    <h1 class="display text-reveal">We help brands and creators <span class="hl animate-pulse">win on social</span> with performance, creative and technology.</h1>
     <p class="hero-sub">Creator campaigns, casino & NFT user acquisition (licensed markets), content & video, programming services, verification assistance, account recovery guidance, and brand protection — under one roof.</p>
-    <div class="hero-badges">
-      <span class="badge">Global creator network</span>
-      <span class="badge">Data-driven strategy</span>
-      <span class="badge">Full-service creative</span>
-      <span class="badge">Compliance-first</span>
+    <div class="hero-badges stagger-animation" id="heroBadges">
+      <span class="badge shimmer-effect">Global creator network</span>
+      <span class="badge shimmer-effect">Data-driven strategy</span>
+      <span class="badge shimmer-effect">Full-service creative</span>
+      <span class="badge shimmer-effect">Compliance-first</span>
     </div>
     <div class="hero-ctas">
-      <a href="#contact" class="btn-primary btn">Book a Strategy Call</a>
-      <a href="#services" class="btn">Explore Services</a>
+      <a href="#contact" class="btn-primary btn gradient-shift">Book a Strategy Call</a>
+      <a href="#services" class="btn shimmer-effect">Explore Services</a>
     </div>
   </div>
 </header>
 
 <!-- PRESS STRIP -->
-<section class="section">
+<section class="section" id="pressSection">
   <div class="container center reveal">
-    <div class="sec-note">As featured by partners and media</div>
-    <div class="logostrip" style="margin-top:12px">
-      <img class="logo-badge" src="https://upload.wikimedia.org/wikipedia/commons/0/09/Forbes_logo.svg" alt="Forbes">
-      <img class="logo-badge" src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Daily_Mail_logo.svg" alt="Daily Mail">
-      <img class="logo-badge" src="https://upload.wikimedia.org/wikipedia/commons/1/19/Bloomberg_logo.svg" alt="Bloomberg">
-      <img class="logo-badge" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/TechCrunch_logo.svg" alt="TechCrunch">
-      <img class="logo-badge" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Business_Insider_Logo.svg" alt="Business Insider">
+    <div class="sec-note slide-down">As featured by partners and media</div>
+    <div class="logostrip stagger-animation" style="margin-top:12px" id="logoStrip">
+      <img class="logo-badge animate-float" src="https://upload.wikimedia.org/wikipedia/commons/0/09/Forbes_logo.svg" alt="Forbes">
+      <img class="logo-badge animate-float" src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Daily_Mail_logo.svg" alt="Daily Mail">
+      <img class="logo-badge animate-float" src="https://upload.wikimedia.org/wikipedia/commons/1/19/Bloomberg_logo.svg" alt="Bloomberg">
+      <img class="logo-badge animate-float" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/TechCrunch_logo.svg" alt="TechCrunch">
+      <img class="logo-badge animate-float" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Business_Insider_Logo.svg" alt="Business Insider">
     </div>
   </div>
 </section>
 
-<!-- ABOUT US (NEW ENHANCED SECTION) -->
-<section id="about" class="section alt">
+<!-- INVESTORS -->
+<section id="investors" class="section alt" data-animate>
   <div class="container">
     <div class="sec-head">
-      <h2 class="title">About Viral International</h2>
-      <div class="sec-note">Connecting brands with global audiences through innovative digital strategies</div>
+      <h2 class="title bounce-in">Investor Overview</h2>
+      <div class="sec-note slide-left">USD or ARS — flexible structures</div>
+    </div>
+    <div class="grid cols-3 stagger-animation" id="investorsGrid">
+      <div class="card reveal shimmer-effect">
+        <div class="icon animate-float">💼</div>
+        <h3>Use of Funds</h3>
+        <p>Scale creator inventory & infrastructure: 10–15 IG accounts with 500K–5M followers each, content & moderation teams, and ops.</p>
+        <ul class="taglist" style="margin-top:8px">
+          <span class="tag">Creator inventory</span>
+          <span class="tag">Content ops</span>
+          <span class="tag">Automation</span>
+        </ul>
+      </div>
+      <div class="card reveal shimmer-effect">
+        <div class="icon animate-float">📊</div>
+        <h3>Ticket & Returns</h3>
+        <p>From <b>USD 10K</b> (or ARS eq.) with revenue-share on campaigns and platform services. Clear reporting, monthly distributions.</p>
+        <div class="kpi">
+          <span class="pill">Rev-share aligned</span>
+          <span class="pill">Monthly reports</span>
+          <span class="pill">Risk-managed</span>
+        </div>
+      </div>
+      <div class="card reveal shimmer-effect">
+        <div class="icon animate-float">🔎</div>
+        <h3>Governance</h3>
+        <p>Transparent dashboards, campaign logs and creator performance trackers. Compliance-first in each market.</p>
+        <ul class="taglist" style="margin-top:8px">
+          <span class="tag">KPIs & cohorts</span>
+          <span class="tag">Budget guardrails</span>
+          <span class="tag">Quarterly reviews</span>
+        </ul>
+      </div>
+    </div>
+    <div class="center" style="margin-top:16px">
+      <a href="#contact" class="btn btn-ghost shimmer-effect">Request the Investment Deck</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" data-animate>
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="title text-reveal">Let's Build Your Social Advantage</h2>
+      <div class="sec-note fade-scale">Tell us about your goals — we'll reply within 24h</div>
+    </div>
+
+    <form class="card form reveal animate-morph" onsubmit="event.preventDefault(); alert('Thanks! We will get back within 24h.'); this.reset();">
+      <input class="input" type="text" placeholder="Full name" required>
+      <input class="input" type="email" placeholder="Email" required>
+      <input class="input" type="text" placeholder="Company / Personal brand">
+      <select class="input" style="color:#e9eef7;">
+        <option value="" style="color:#a7b0bd;">Service of interest</option>
+        <option value="influencer" style="background:#0e1218;color:#e9eef7;">Influencer & Celebrity Campaigns</option>
+        <option value="organic" style="background:#0e1218;color:#e9eef7;">Organic Growth & Community</option>
+        <option value="leads" style="background:#0e1218;color:#e9eef7;">Lead Generation</option>
+        <option value="verification" style="background:#0e1218;color:#e9eef7;">Verification Assistance</option>
+        <option value="recovery" style="background:#0e1218;color:#e9eef7;">Account Recovery & Protection</option>
+        <option value="programming" style="background:#0e1218;color:#e9eef7;">Programming & Automation</option>
+        <option value="content" style="background:#0e1218;color:#e9eef7;">Content & Video</option>
+        <option value="whatsapp" style="background:#0e1218;color:#e9eef7;">WhatsApp Business Services</option>
+        <option value="paid" style="background:#0e1218;color:#e9eef7;">Paid Distribution</option>
+        <option value="casino" style="background:#0e1218;color:#e9eef7;">Casinos & iGaming</option>
+        <option value="nft" style="background:#0e1218;color:#e9eef7;">NFT & Web3</option>
+      </select>
+      <textarea class="full" placeholder="Share objectives, timing and markets…"></textarea>
+      <button class="btn-primary gradient-shift" type="submit">Send Inquiry</button>
+    </form>
+
+    <div class="center small" style="margin-top:10px">
+      Prefer email? <b>ViralInternationalUS@gmail.com</b> • Phone: <b>+54 9 11 3065-2655</b> • Miami, FL
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-row">
+    <div class="copy">©️ 2024 Viral International, LLC — All rights reserved.</div>
+    <div class="socials">
+      <a class="ig-pill animate-pulse" href="https://www.instagram.com/viralinternationalagency?igsh=MWVvZ20xZzBvbHBxcQ==" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 715 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 715-5zm5 5a5 5 0 100 10 5 5 0 000-10zm6.5-.9a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2zM12 9a3 3 0 110 6 3 3 0 010-6z"/></svg>
+        <span>Instagram</span>
+      </a>
+    </div>
+  </div>
+  <div class="container center small" style="margin-top:8px;color:#93a0b3">
+    Built with a compliance-first approach. We never promise outcomes that violate platform policies.
+  </div>
+</footer>
+
+<script src="animations.js"></script>
+</body>
+</html>
+
+<!-- ABOUT US -->
+<section id="about" class="section alt" data-animate>
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="title slide-left">About Viral International</h2>
+      <div class="sec-note slide-right">Connecting brands with global audiences through innovative digital strategies</div>
     </div>
     
-    <div class="about-text reveal">
+    <div class="about-text reveal text-reveal">
       En Viral International somos una agencia creativa global especializada en marketing de alto impacto. Nuestro equipo combina estrategia, creatividad y tecnología para llevar tu marca a la cima. Conectamos tu negocio con los influencers y creadores de contenido más relevantes, asegurando campañas efectivas y rentables. Nuestra visión es impulsar proyectos que marquen tendencia, inspiren confianza y generen resultados reales. Desde lanzamientos internacionales hasta nichos específicos, nuestra misión es que tu marca no solo crezca, sino que destaque.
     </div>
 
-    <div class="grid cols-3">
-      <div class="card reveal">
-        <div class="icon">📐</div>
+    <div class="grid cols-3 stagger-animation" id="aboutGrid">
+      <div class="card reveal animate-morph">
+        <div class="icon animate-pulse">📐</div>
         <h3>Strategy</h3>
         <p>From brand positioning to audience architecture, we design systems that compound. Working internationally with a focus on measurable results and innovative digital strategies.</p>
       </div>
-      <div class="card reveal">
-        <div class="icon">⚙️</div>
+      <div class="card reveal animate-morph">
+        <div class="icon animate-pulse">⚙️</div>
         <h3>Execution</h3>
         <p>We operate creator campaigns, content engines and media — end-to-end. Connecting brands with the best influencers and content creators, optimizing reach and conversion.</p>
       </div>
-      <div class="card reveal">
-        <div class="icon">📡</div>
+      <div class="card reveal animate-morph">
+        <div class="icon animate-pulse">📡</div>
         <h3>Measurement</h3>
         <p>Dashboards, cohort analysis and experimentation to keep the flywheel spinning. Transparent approach ensuring campaigns that create trends, inspire trust and generate real results.</p>
       </div>
     </div>
 
     <div class="center" style="margin-top:32px">
-      <p class="reveal" style="color:#cbd3e1;max-width:800px;margin:0 auto">
+      <p class="reveal fade-scale" style="color:#cbd3e1;max-width:800px;margin:0 auto">
         Somos una agencia internacional con un equipo multidisciplinario que domina el arte de conectar marcas con su audiencia ideal. Nuestra experiencia abarca múltiples sectores, con especialización en campañas digitales de alto rendimiento. Creemos en la transparencia, la innovación y el crecimiento mutuo con nuestros clientes. Cada proyecto es una oportunidad para superar expectativas y marcar la diferencia.
       </p>
     </div>
@@ -314,16 +822,16 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="section">
+<section id="services" class="section" data-animate>
   <div class="container">
     <div class="sec-head">
-      <h2 class="title">Services</h2>
-      <div class="sec-note">End-to-end, social-first. Built for scale.</div>
+      <h2 class="title bounce-in">Services</h2>
+      <div class="sec-note slide-right">End-to-end, social-first. Built for scale.</div>
     </div>
 
-    <div class="grid cols-3">
-      <div class="card service-card reveal">
-        <div class="icon">🎯</div>
+    <div class="grid cols-3 stagger-animation" id="servicesGrid">
+      <div class="card service-card reveal shimmer-effect">
+        <div class="icon animate-glow">🎯</div>
         <h3>Influencer & Celebrity Campaigns</h3>
         <p>Strategy, sourcing, contracting and performance tracking across Instagram, TikTok, YouTube & X.</p>
         <div class="line"></div>
@@ -334,8 +842,8 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </ul>
       </div>
 
-      <div class="card service-card reveal">
-        <div class="icon">🚀</div>
+      <div class="card service-card reveal shimmer-effect">
+        <div class="icon animate-glow">🚀</div>
         <h3>Organic Growth & Community</h3>
         <p>Audience development with content systems, engagement playbooks and analytics loops.</p>
         <div class="line"></div>
@@ -346,8 +854,8 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </ul>
       </div>
 
-      <div class="card service-card reveal">
-        <div class="icon">🧩</div>
+      <div class="card service-card reveal shimmer-effect">
+        <div class="icon animate-glow">🧩</div>
         <h3>Lead Generation</h3>
         <p>Acquisition funnels for brands & personal profiles. From landing pages to CRM handoff.</p>
         <div class="line"></div>
@@ -358,8 +866,8 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </ul>
       </div>
 
-      <div class="card service-card reveal">
-        <div class="icon">🔵</div>
+      <div class="card service-card reveal shimmer-effect">
+        <div class="icon animate-glow">🔵</div>
         <h3>Verification Assistance</h3>
         <p>We guide eligible clients through official platform processes and best-practice packaging.</p>
         <div class="line"></div>
@@ -370,8 +878,8 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </ul>
       </div>
 
-      <div class="card service-card reveal">
-        <div class="icon">🛡️</div>
+      <div class="card service-card reveal shimmer-effect">
+        <div class="icon animate-glow">🛡️</div>
         <h3>Account Recovery & Protection</h3>
         <p>Structured incident response and hardened account setups to minimize future risk.</p>
         <div class="line"></div>
@@ -382,8 +890,8 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </ul>
       </div>
 
-      <div class="card service-card reveal">
-        <div class="icon">💻</div>
+      <div class="card service-card reveal shimmer-effect">
+        <div class="icon animate-glow">💻</div>
         <h3>Programming & Automation</h3>
         <p>Internal tools for reporting, content ops and creator workflows — built to your stack.</p>
         <div class="line"></div>
@@ -394,8 +902,8 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </ul>
       </div>
 
-      <div class="card service-card reveal">
-        <div class="icon">🎬</div>
+      <div class="card service-card reveal shimmer-effect">
+        <div class="icon animate-glow">🎬</div>
         <h3>Content & Video</h3>
         <p>Concept, scripting, editing and motion — optimized for reels, shorts and stories.</p>
         <div class="line"></div>
@@ -406,8 +914,8 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </ul>
       </div>
 
-      <div class="card service-card reveal">
-        <div class="icon">📲</div>
+      <div class="card service-card reveal shimmer-effect">
+        <div class="icon animate-glow">📲</div>
         <h3>WhatsApp Business Services</h3>
         <p>Secure setups, policy guidance and support workflows for business messaging.</p>
         <div class="line"></div>
@@ -418,8 +926,8 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </ul>
       </div>
 
-      <div class="card service-card reveal">
-        <div class="icon">📈</div>
+      <div class="card service-card reveal shimmer-effect">
+        <div class="icon animate-glow">📈</div>
         <h3>Paid Distribution</h3>
         <p>Highly targeted media across social & programmatic to amplify what works.</p>
         <div class="line"></div>
@@ -433,18 +941,18 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
   </div>
 </section>
 
-<!-- EXPERTISE: CASINOS & NFT (ENHANCED) -->
-<section id="expertise" class="section alt">
+<!-- EXPERTISE: CASINOS & NFT -->
+<section id="expertise" class="section alt" data-animate>
   <div class="container">
     <div class="sec-head">
-      <h2 class="title">Specialized Campaigns — Casino & NFT</h2>
-      <div class="sec-note">Licensed markets only • Compliance-first • Performance-driven</div>
+      <h2 class="title rotate-in">Specialized Campaigns — Casino & NFT</h2>
+      <div class="sec-note slide-left">Licensed markets only • Compliance-first • Performance-driven</div>
     </div>
 
     <!-- Casino Marketing Section -->
     <div class="expertise">
-      <div class="card reveal">
-        <div class="icon">🎰</div>
+      <div class="card reveal slide-right">
+        <div class="icon animate-float">🎰</div>
         <h3>Marketing Creativo de Casinos</h3>
         <p>En Viral International diseñamos campañas publicitarias únicas para casinos físicos y online. Conocemos el sector, su competencia y su público objetivo. Creamos estrategias creativas que aumentan el tráfico, potencian la retención y generan un mayor retorno de inversión. Desde la producción de contenido hasta la gestión de anuncios y colaboraciones con influencers especializados, llevamos tu casino al siguiente nivel.</p>
         <ul class="taglist" style="margin-top:12px">
@@ -461,18 +969,18 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
           <span class="pill">Compliance reviews</span>
         </div>
       </div>
-      <div class="img reveal">
-        <img  src="assets/Casino.jpg"  alt="Casino marketing creative">
+      <div class="img reveal slide-left">
+        <img src="assets/Casino.jpg" alt="Casino marketing creative">
       </div>
     </div>
 
     <!-- NFT Marketing Section -->
     <div class="expertise" style="margin-top:32px">
-      <div class="img reveal">
-        <img  src="assets/NFT-marketing.jpg"  alt="NFT and web3 visual">
+      <div class="img reveal slide-right">
+        <img src="assets/NFT-marketing.jpg" alt="NFT and web3 visual">
       </div>
-      <div class="card reveal">
-        <div class="icon">🧠</div>
+      <div class="card reveal slide-left">
+        <div class="icon animate-float">🧠</div>
         <h3>Publicidad para NFT</h3>
         <p>El mundo NFT se mueve rápido, y nosotros sabemos cómo posicionarte en él. Desarrollamos campañas que generan comunidad, credibilidad y ventas. Trabajamos con influencers, artistas y creadores de contenido que conocen el ecosistema blockchain, impulsando tu colección NFT desde el lanzamiento hasta la consolidación en el mercado. Nuestro enfoque combina marketing digital avanzado con narrativas que generan valor y engagement.</p>
         <ul class="taglist" style="margin-top:12px">
@@ -494,15 +1002,14 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
 </section>
 
 <!-- INFLUENCERS -->
-<section id="influencers" class="section">
+<section id="influencers" class="section" data-animate>
   <div class="container">
     <div class="sec-head">
-      <h2 class="title">Creators We Work With</h2>
-      <div class="sec-note">Sample verticals & geos (click to view profiles)</div>
+      <h2 class="title bounce-in">Creators We Work With</h2>
+      <div class="sec-note fade-scale">Sample verticals & geos (click to view profiles)</div>
     </div>
-    <div class="grid cols-3">
-      <!-- LATAM / AR -->
-      <a class="card reveal" href="https://www.instagram.com/nickisalgado" target="_blank" rel="noopener">
+    <div class="grid cols-3 stagger-animation" id="influencersGrid">
+      <a class="card reveal shimmer-effect" href="https://www.instagram.com/nickisalgado" target="_blank" rel="noopener">
         <div class="influencer">
           <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=300&q=70" alt="Lifestyle creator">
           <div class="meta">
@@ -515,7 +1022,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </div>
       </a>
 
-      <a class="card reveal" href="https://www.instagram.com/candeoficial" target="_blank" rel="noopener">
+      <a class="card reveal shimmer-effect" href="https://www.instagram.com/candeoficial" target="_blank" rel="noopener">
         <div class="influencer">
           <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=300&q=70" alt="Fashion creator">
           <div class="meta">
@@ -525,8 +1032,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </div>
       </a>
 
-      <!-- US -->
-      <a class="card reveal" href="https://www.instagram.com/techwithjay" target="_blank" rel="noopener">
+      <a class="card reveal shimmer-effect" href="https://www.instagram.com/techwithjay" target="_blank" rel="noopener">
         <div class="influencer">
           <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=70" alt="Tech creator">
           <div class="meta">
@@ -536,8 +1042,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </div>
       </a>
 
-      <!-- EU -->
-      <a class="card reveal" href="https://www.instagram.com/fitnina" target="_blank" rel="noopener">
+      <a class="card reveal shimmer-effect" href="https://www.instagram.com/fitnina" target="_blank" rel="noopener">
         <div class="influencer">
           <img src="https://images.unsplash.com/photo-1546484959-f9a53db89bee?auto=format&fit=crop&w=300&q=70" alt="Fitness creator">
           <div class="meta">
@@ -547,8 +1052,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </div>
       </a>
 
-      <!-- BR -->
-      <a class="card reveal" href="https://www.instagram.com/culinariabr" target="_blank" rel="noopener">
+      <a class="card reveal shimmer-effect" href="https://www.instagram.com/culinariabr" target="_blank" rel="noopener">
         <div class="influencer">
           <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?auto=format&fit=crop&w=300&q=70" alt="Food creator">
           <div class="meta">
@@ -558,8 +1062,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         </div>
       </a>
 
-      <!-- MX -->
-      <a class="card reveal" href="https://www.instagram.com/edu.musica" target="_blank" rel="noopener">
+      <a class="card reveal shimmer-effect" href="https://www.instagram.com/edu.musica" target="_blank" rel="noopener">
         <div class="influencer">
           <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=70" alt="Music creator">
           <div class="meta">
@@ -572,14 +1075,14 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
   </div>
 </section>
 
-<!-- TESTIMONIALS (NEW SECTION) -->
-<section id="testimonials" class="section alt">
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section alt" data-animate>
   <div class="container">
     <div class="sec-head">
-      <h2 class="title">Client Reviews</h2>
-      <div class="sec-note">What our clients say about working with us</div>
+      <h2 class="title slide-down">Client Reviews</h2>
+      <div class="sec-note fade-scale">What our clients say about working with us</div>
     </div>
-    <div class="grid cols-2">
+    <div class="grid cols-2 stagger-animation" id="testimonialsGrid">
       <div class="testimonial reveal">
         <p class="testimonial-text">Gracias a Viral International duplicamos nuestras ventas en solo tres meses. Un equipo increíble que realmente entiende el mercado digital.</p>
         <div class="testimonial-author">
@@ -650,13 +1153,13 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
 </section>
 
 <!-- TEAM -->
-<section id="team" class="section">
+<section id="team" class="section" data-animate>
   <div class="container">
     <div class="sec-head">
-      <h2 class="title">Leadership</h2>
-      <div class="sec-note">Hands-on operators with global experience</div>
+      <h2 class="title rotate-in">Leadership</h2>
+      <div class="sec-note slide-up">Hands-on operators with global experience</div>
     </div>
-    <div class="grid cols-3">
+    <div class="grid cols-3 stagger-animation" id="teamGrid">
       <div class="card team-card reveal">
         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=70" alt="Founder">
         <h3>Facundo A.</h3>
@@ -676,114 +1179,3 @@ footer{border-top:1px solid var(--line);padding:24px 0;background:var(--bg)}
         <p>Owns data, engineering & automation — from analytics to internal tooling.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- INVESTORS -->
-<section id="investors" class="section alt">
-  <div class="container">
-    <div class="sec-head">
-      <h2 class="title">Investor Overview</h2>
-      <div class="sec-note">USD or ARS — flexible structures</div>
-    </div>
-    <div class="grid cols-3">
-      <div class="card reveal">
-        <div class="icon">💼</div>
-        <h3>Use of Funds</h3>
-        <p>Scale creator inventory & infrastructure: 10–15 IG accounts with 500K–5M followers each, content & moderation teams, and ops.</p>
-        <ul class="taglist" style="margin-top:8px">
-          <span class="tag">Creator inventory</span>
-          <span class="tag">Content ops</span>
-          <span class="tag">Automation</span>
-        </ul>
-      </div>
-      <div class="card reveal">
-        <div class="icon">📊</div>
-        <h3>Ticket & Returns</h3>
-        <p>From <b>USD 10K</b> (or ARS eq.) with revenue-share on campaigns and platform services. Clear reporting, monthly distributions.</p>
-        <div class="kpi">
-          <span class="pill">Rev-share aligned</span>
-          <span class="pill">Monthly reports</span>
-          <span class="pill">Risk-managed</span>
-        </div>
-      </div>
-      <div class="card reveal">
-        <div class="icon">🔎</div>
-        <h3>Governance</h3>
-        <p>Transparent dashboards, campaign logs and creator performance trackers. Compliance-first in each market.</p>
-        <ul class="taglist" style="margin-top:8px">
-          <span class="tag">KPIs & cohorts</span>
-          <span class="tag">Budget guardrails</span>
-          <span class="tag">Quarterly reviews</span>
-        </ul>
-      </div>
-    </div>
-    <div class="center" style="margin-top:16px">
-      <a href="#contact" class="btn btn-ghost">Request the Investment Deck</a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="section">
-  <div class="container">
-    <div class="sec-head">
-      <h2 class="title">Let's Build Your Social Advantage</h2>
-      <div class="sec-note">Tell us about your goals — we'll reply within 24h</div>
-    </div>
-
-    <form class="card form reveal" onsubmit="event.preventDefault(); alert('Thanks! We will get back within 24h.'); this.reset();">
-      <input class="input" type="text" placeholder="Full name" required>
-      <input class="input" type="email" placeholder="Email" required>
-      <input class="input" type="text" placeholder="Company / Personal brand">
-      <select class="input" style="color:#e9eef7;">
-        <option value="" style="color:#a7b0bd;">Service of interest</option>
-        <option value="influencer" style="background:#0e1218;color:#e9eef7;">Influencer & Celebrity Campaigns</option>
-        <option value="organic" style="background:#0e1218;color:#e9eef7;">Organic Growth & Community</option>
-        <option value="leads" style="background:#0e1218;color:#e9eef7;">Lead Generation</option>
-        <option value="verification" style="background:#0e1218;color:#e9eef7;">Verification Assistance</option>
-        <option value="recovery" style="background:#0e1218;color:#e9eef7;">Account Recovery & Protection</option>
-        <option value="programming" style="background:#0e1218;color:#e9eef7;">Programming & Automation</option>
-        <option value="content" style="background:#0e1218;color:#e9eef7;">Content & Video</option>
-        <option value="whatsapp" style="background:#0e1218;color:#e9eef7;">WhatsApp Business Services</option>
-        <option value="paid" style="background:#0e1218;color:#e9eef7;">Paid Distribution</option>
-        <option value="casino" style="background:#0e1218;color:#e9eef7;">Casinos & iGaming</option>
-        <option value="nft" style="background:#0e1218;color:#e9eef7;">NFT & Web3</option>
-      </select>
-      <textarea class="full" placeholder="Share objectives, timing and markets…"></textarea>
-      <button class="btn-primary" type="submit">Send Inquiry</button>
-    </form>
-
-    <div class="center small" style="margin-top:10px">
-      Prefer email? <b>ViralInternationalUS@gmail.com</b> • Phone: <b>+54 9 11 3065-2655</b> • Miami, FL
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container footer-row">
-    <div class="copy">©️ 2024 Viral International, LLC — All rights reserved.</div>
-    <div class="socials">
-      <a class="ig-pill" href="https://www.instagram.com/viralinternationalagency?igsh=MWVvZ20xZzBvbHBxcQ==" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 715 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 715-5zm5 5a5 5 0 100 10 5 5 0 000-10zm6.5-.9a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2zM12 9a3 3 0 110 6 3 3 0 010-6z"/></svg>
-        <span>Instagram</span>
-      </a>
-    </div>
-  </div>
-  <div class="container center small" style="margin-top:8px;color:#93a0b3">
-    Built with a compliance-first approach. We never promise outcomes that violate platform policies.
-  </div>
-</footer>
-
-<script>
-/* Mobile menu */
-const mt=document.getElementById('menuToggle'); const m=document.getElementById('menu');
-mt.addEventListener('click',()=>m.classList.toggle('is-open'));
-
-/* Reveal on scroll */
-const io=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting) x.target.classList.add('on')})},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-</script>
-</body>
-</html>
